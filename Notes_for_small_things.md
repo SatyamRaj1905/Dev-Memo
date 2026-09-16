@@ -354,6 +354,8 @@ The above command just says that inject the environment files present `.env` ins
 ----------
 Before knowing about this lets understand the difference between Forking and Cloning
 
+### **Forking V/S Cloning**
+
 <div align="center">
 
 | <div align="center">Point</div> | <div align="center">Cloning</div> | <div align="center">Forking</div> |
@@ -370,4 +372,80 @@ Before knowing about this lets understand the difference between Forking and Clo
 
 Now coming to the safe forking and cloning, for this follow these steps ->
 
-**Step 1 ->**
+**Step 1 ->** Click on the repo whom you want to contribute to and then inside Click on Fork -> create new fork
+
+**Step 2 ->** Give the name of the remore repo and then copy the clone url 
+
+**Step 3 ->** Run the command
+
+```console
+git clone REPO_URL 
+```
+
+**Step 4 ->** Make the necessary changes in the repo
+
+**Step 5 ->** Make another branch once finised
+
+```console
+git switch -c BRANCH_NAME 
+```
+
+**Step 6 ->** Now do what you do normally 
+
+```console 
+git status
+git add .
+git commit -m "Commit message"
+git push -u origin BRANCH_NAME
+```
+After this go to your repo dashboard there you will see button for the `Compare & Pull request` click on it, it will start to merge the pull request and once you see green tick, you are good to go
+
+Now if you are lucky, then the repo in which you want to contribute will see your pull request inside its repo and will Merge Request
+
+Once the branch is merged to the main branch, 
+
+**Step 7 ->** Delete the branch made
+
+```console
+git branch -d BRANCH_NAME
+```
+### **Fetching the updated content**
+----------
+
+Now lets say the moment your contents got merged into the original repo using your pull request and then after some time some other person also get its pull request merged into that repo or repo owner itself added some contents inside that repo and **now you want to update your local as well github side made forked github repo to update according to the updated target contribution repo**, Then follow the below steps in order to achieve it  
+
+**Step 1 ->** Downloads the latest original-repository history using below command 
+
+```console
+git fetch upstream
+```
+
+**Step 2 ->** Leaves your completed feature branch and opens `main` branch using the command 
+
+```console
+git switch main
+```
+**Step 3 ->** safely updates local `main` branch using the below command
+
+```console
+git merge --ff-only upstream/main
+```
+> `--ff-only` **allows the merge only when Git can move the current branch pointer straight forward. It prevents Git from creating a merge commit. If the branches have diverged, the command stops without changing anything.**
+
+```text
+Before:
+
+local main:     A---B
+upstream/main:  A---B---C---D
+
+After:
+
+local main:     A---B---C---D
+upstream/main:  A---B---C---D
+```
+
+**Step 4 ->** Finally, push the updated code which just came into the local file to the remote forked repo also by running the below command 
+
+```console
+git push origin main
+```

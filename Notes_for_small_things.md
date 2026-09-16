@@ -350,3 +350,24 @@ docker run -d \
 ```
 The above command just says that inject the environment files present `.env` inside the folder `Backend` and run it on the port `3000`
 
+## **Properly forking and making a PR on github**
+----------
+Before knowing about this lets understand the difference between Forking and Cloning
+
+<div align="center">
+
+| <div align="center">Point</div> | <div align="center">Cloning</div> | <div align="center">Forking</div> |
+|---|---|---|
+| Meaning | Downloads a repository to your computer | Creates your own Github copy of someone else's repo on the server side |
+| Location | Your computer |Your Github account |
+| Main Purpose | Work on files locally | Contribute without needing write access to the original repository |
+| Can you push ? | Only if you have permission | Yes, because the fork belongs to you |
+| How it is done | `git clone REPO_URL` | Click Frok -> create new fork on github |
+| Connection | Local clone connects to the github repo | Fork remains connected to the original repo |
+| Usual contribution flow | clone -> branch -> change -> push |Fork -> clone fork -> branch -> change -> push -> pull request |
+
+</div>
+
+Now coming to the safe forking and cloning, for this follow these steps ->
+
+**Step 1 ->**

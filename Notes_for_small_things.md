@@ -420,7 +420,7 @@ Now lets say the moment your contents got merged into the original repo using yo
 git fetch upstream
 ```
 
-**Step 2 ->** Leaves your completed feature branch and opens `main` branch using the command 
+**Step 2 ->** Leave your completed feature branch and opens `main` branch (basically switch to your local `main`) using the command 
 
 ```console
 git switch main
@@ -431,20 +431,98 @@ git switch main
 git merge --ff-only upstream/main
 ```
 > `--ff-only` **allows the merge only when Git can move the current branch pointer straight forward. It prevents Git from creating a merge commit. If the branches have diverged, the command stops without changing anything.**
+>
+> > `ff` stands for **fast-forward**
+
+Below is a diagram to show you meaning of fast-forward
 
 ```text
-Before:
+Before: (your local main is behind the original rep)
 
 local main:     A---B
 upstream/main:  A---B---C---D
 
-After:
+After: (As your local branch has no seperate changes, git can simply move it forward from B to D like a FAST FORWARD)
 
 local main:     A---B---C---D
 upstream/main:  A---B---C---D
 ```
+Now lets understand the meaning of **Diverged branches**
+
+Branches have **diverged** when both sides contain different new commits after the same starting point:
+
+```text
+              C ── D    upstream/main
+             /
+A ── B
+             \
+              X ── Y    local main
+
+```
+After commit B:
+- The original repository added C and D.
+- You separately added X and Y to your local main.
+  
+Git cannot simply move your local branch forward because doing so would ignore your X and Y commits. The histories have taken two different roads—so they have diverged.
+
+**Merge Commit**
+
+A **merge commit** is a new commit that joins two diverged roads:
+
+```text
+              C ── D
+             /      \
+A ── B                M
+             \      /
+              X ── Y
+```
+`M` is the merge commit. It records that Git combined the changes from both branches.
+
+A normal command such as:
+
+```console
+git pull upstream main
+```
+may create a merge commit when the branches have diverged
+
+But
+
+```console
+git pull --ff-only upstream main
+```
+means 
+
+- “Update my branch only if it can be moved straight forward. If the histories have diverged, stop and let me examine the situation.”
 
 **Step 4 ->** Finally, push the updated code which just came into the local file to the remote forked repo also by running the below command 
+
+```console
+git push origin main
+```
+
+Apart from the above you can also use 
+
+```console
+git pull --ff-only upstream main
+
+// as the above command is equivalent to running
+git fetch upstream
+git merge --ff-only upstream main
+```
+
+so now this sequence of commands can also works and will produce the same output as the above series of commands
+
+**Step 1 ->** Switch to your local `main`.
+
+```console
+git switch main
+```
+**Step 2 ->** Download `main` from the original repository (`upstream`) and fast-forward your local `main`.
+
+```console
+git pull --ff-only upstream main
+```
+**Step 3 ->** Push the updated local `main` to your fork (`origin`)
 
 ```console
 git push origin main

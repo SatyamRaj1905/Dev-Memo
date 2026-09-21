@@ -13,6 +13,8 @@
   - [**Properly forking and making a PR on github**](#properly-forking-and-making-a-pr-on-github)
     - [**Forking V/S Cloning**](#forking-vs-cloning)
     - [**Fetching the updated content**](#fetching-the-updated-content)
+    - [**Art of writing meaningful git commit messages**](#art-of-writing-meaningful-git-commit-messages)
+
 
 
 ## **Integrating AI in your project**
@@ -113,7 +115,7 @@ Just add the `dev` script inside the `package.json` file
   "test": "node --test"
 }
 ```
-then just run `npm run dev` and now no need for the server to again reload the server, it will automatically reload the server after any changes made
+**then just run `npm run dev`** and now no need for the server to again reload the server, it will automatically reload the server after any changes made
 
 ## **Pushing to another github account while signed in with  the main account**
 ----------
@@ -473,7 +475,7 @@ Git cannot simply move your local branch forward because doing so would ignore y
 A **merge commit** is a new commit that joins two diverged roads:
 
 ```text
-              C ── D
+              C ── D$$
              /      \
 A ── B                M
              \      /
@@ -530,3 +532,10 @@ git pull --ff-only upstream main
 ```console
 git push origin main
 ```
+
+### **Art of writing meaningful git commit messages**
+----------
+You always should write git commit message in such a way that just by reading most of the things gets clear and for this refer to the blog post pdf attached below
+
+[Art of writing meaningful git commit messages](Notes_for_small_things.md)
+

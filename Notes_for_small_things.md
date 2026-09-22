@@ -539,5 +539,5 @@ You always should write git commit message in such a way that just by reading mo
 
 [Art of writing meaningful git commit messages](Notes_for_small_things.md)
 
-Or you can also refer to the pdf file named as "Art of writing meaningful git commit messages" present in this repository
+Or you can also refer to the pdf file named as "Art of writing meaningful git commit messages" present in this repository.
 
